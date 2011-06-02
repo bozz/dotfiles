@@ -4,7 +4,12 @@ export TERM=xterm-color
 export CLICOLOR=true
 export LSCOLORS=true
 export LSCOLORS=DxGxcxdxCxegedabagacad
-PS1='\[\033[0;32m\]\u@\h\[\033[0;36m\]\W\$ \[\033[1;37m\]'
+PS1='\[\033[0;32m\]\u@\h\[\033[0;36m\]:\W\$ \[\033[1;37m\]'
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
 
 # use vim as git/svn editor
 export GIT_EDITOR='vim -wl1'
