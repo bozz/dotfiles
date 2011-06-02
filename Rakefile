@@ -9,7 +9,7 @@ task :install do
   target_dir = '~'
 
   Dir.foreach(cwd) do |file|
-    unless ignore.include?(file) || file[0]=='.'
+    unless ignore.include?(file) || file.index(/^\./)
       if file.index(/.local$/)
         puts "!!  Do you want to overwrite .#{file} (y/n) ?"
         confirm = gets.chomp
