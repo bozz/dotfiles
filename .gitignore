@@ -2,6 +2,6 @@
 .Trash
 .bundle
 tmp/**/*
-webrat.log
 .swp
 .svn
+vim/tmp
