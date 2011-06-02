@@ -1,0 +1,20 @@
+alias dirsize='du -skhx'
+alias ll="ls -lha"
+
+alias profile='vim ~/.bashrc.local'
+alias papply='vim ~/.bashrc.local'
+
+# rails
+alias ss='rails server -p 3001'
+alias tlog='tail -f log/development.log'
+alias ropen='open http://localhost:3001'
+
+# git
+alias glog='git log --name-status'
+
+# svn
+alias sup='svn update'
+alias scom='svn commit'
+alias slog='svn log'
+alias svnp='svn log -r head:prev -v'
+alias svnstat='svn diff -r PREV:COMMITTED --summarize'

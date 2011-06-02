@@ -1,0 +1,5 @@
+let mapleader = ","
+
+color wombat256
+
+set guifont=Monaco:h12
