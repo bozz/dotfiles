@@ -6,7 +6,7 @@
 task :install do
   ignore = %w[README Rakefile]
   cwd = File.expand_path("../", __FILE__)
-  target_dir = '~/'
+  target_dir = '~'
 
   Dir.foreach(cwd) do |file|
     unless ignore.include?(file) || file[0]=='.'
