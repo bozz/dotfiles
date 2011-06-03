@@ -16,7 +16,13 @@ task :install do
         next if confirm!='y'
       end
       cp_opts = File.directory?(file) ? '-rf' : ''
-      sh "cp #{cp_opts} #{file} #{target_dir}/.#{file}"
+
+      if file=='vimrc' || file=='gvimrc'
+	sh "rm ~/.#{file}"
+        sh "ln -s ~/.vim/#{file} ~/.#{file}"
+      else
+        sh "cp #{cp_opts} #{file} #{target_dir}/.#{file}"
+      end
     end
   end
 end
