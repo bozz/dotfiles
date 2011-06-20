@@ -18,8 +18,9 @@ task :install do
       cp_opts = File.directory?(file) ? '-rf' : ''
 
       if file=='vimrc' || file=='gvimrc'
-	sh "rm ~/.#{file}"
-        sh "ln -s ~/.vim/#{file} ~/.#{file}"
+        file_path = "~/." + file
+      	sh "rm #{file_path}" if File.exists? file_path
+        sh "ln -s ~/.vim/#{file} #{file_path}"
       else
         sh "cp #{cp_opts} #{file} #{target_dir}/.#{file}"
       end
