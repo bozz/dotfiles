@@ -16,3 +16,6 @@ vnoremap <A-j> :m'>+<CR>gv=gv
 vnoremap <A-k> :m-2<CR>gv=gv
 
 let g:JSLintHighlightErrorLine = 1
+
+" add svn blame shortcut for selected text
+vmap gl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<")
