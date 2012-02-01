@@ -5,6 +5,15 @@ function rmd() {
   rm -rf $1
 }
 
+# find file
+function ff() {
+  find . -type f -name $1
+}
+# find directory
+function fd() {
+  find . -type d -name $1
+}
+
 alias profile='vim ~/.bashrc.local'
 alias papply='vim ~/.bashrc.local'
 
