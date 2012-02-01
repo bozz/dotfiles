@@ -1,6 +1,9 @@
 alias ..='cd ..'
 alias dirsize='du -skhx'
 alias ll="ls -lha"
+function rmd() {
+  rm -rf $1
+}
 
 alias profile='vim ~/.bashrc.local'
 alias papply='vim ~/.bashrc.local'
@@ -11,6 +14,7 @@ alias tlog='tail -f log/development.log'
 alias ropen='open http://localhost:3001'
 
 # git
+alias gs='git status'
 alias glog='git log --name-status'
 
 # svn

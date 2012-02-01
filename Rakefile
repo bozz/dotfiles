@@ -6,7 +6,7 @@
 task :install do
   ignore = %w[README Rakefile]
   cwd = File.expand_path("../", __FILE__)
-  target_dir = '~'
+  target_dir = File.expand_path('~')
 
   Dir.foreach(cwd) do |file|
     unless ignore.include?(file) || file.index(/^\./)
@@ -18,11 +18,16 @@ task :install do
       cp_opts = File.directory?(file) ? '-rf' : ''
 
       if file=='vimrc' || file=='gvimrc'
-        file_path = "~/." + file
-      	sh "rm #{file_path}" if File.exists? file_path
-        sh "ln -s ~/.vim/#{file} #{file_path}"
+        file_path = "#{target_dir}/." + file
+      	unless File.symlink?(file_path)
+          sh "ln -s ~/.vim/#{file} #{file_path}"
+        end
       else
-        sh "cp #{cp_opts} #{file} #{target_dir}/.#{file}"
+        file_path = "#{target_dir}/"
+        file_path += file.index(/bin/) ? "" : "."
+        file_path += file
+
+        sh "cp #{cp_opts} #{file} #{file_path}"
       end
     end
   end
