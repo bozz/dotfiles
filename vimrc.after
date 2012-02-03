@@ -1,5 +1,4 @@
 " local changes to janus setup
-let mapleader = ","
 
 colorscheme wombat256 
 
