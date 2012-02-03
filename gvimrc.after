@@ -1,5 +1,16 @@
 let mapleader = ","
 
+" remove gui toolbar
+:set guioptions-=T
+:set guioptions-=r
+:set guioptions-=l
+
+" enables ms-windows like behavior (i.e. copy/paste)
+source $VIMRUNTIME/mswin.vim
+behave mswin
+
+" set colorscheme
 color wombat256
 
-set guifont=Monaco:h12
+" uncomment if font available
+" set guifont=Monaco:h12
