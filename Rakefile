@@ -34,7 +34,7 @@ end
 desc "Update dotfiles"
 task :update do
   puts "updating dotfiles..."
-  #sh "cd $HOME/.vim && rake"
+  sh "cd $HOME/.vim && rake"
 
   copy_dotfiles()
 end
