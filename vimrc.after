@@ -34,6 +34,9 @@ map <C-l> <C-w>l
 nnoremap <Tab> %
 vnoremap <Tab> %
 
+" ZoomWin configuration
+map <Leader>zz :ZoomWin<CR>
+
 " add svn blame shortcut for selected text
 vmap gl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<")
 
@@ -44,6 +47,8 @@ vmap gl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<")
 " NERDTree
 " show hidden files, too
 let NERDTreeShowHidden=1
+" Quit on opening files from the tree
+let NERDTreeQuitOnOpen=1
 " highlight the selected entry in the tree
 let NERDTreeHighlightCursorline=1
 " use a single click for everything
