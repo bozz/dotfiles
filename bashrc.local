@@ -1,0 +1,6 @@
+function tio() {
+  ssh io task $@
+}
+function ta() {
+  ssh io task add $@
+}

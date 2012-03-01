@@ -6,12 +6,17 @@ set noswapfile
 set numberwidth=5
 set path=$PWD/**
 
+" set shellcmdflag=-ic
+
 " Use Node.js for JavaScript interpretation
 let $JS_CMD='node'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key Mappings 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" map capital W to lower case - I ofter accidentally tiggered capital W
+command! W :w
 
 " convenient esc
 map! jj <ESC>
@@ -36,6 +41,9 @@ vnoremap <Tab> %
 
 " ZoomWin configuration
 map <Leader>zz :ZoomWin<CR>
+
+" map search / to 'ö'
+map ö /
 
 " add svn blame shortcut for selected text
 vmap gl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<")
@@ -62,7 +70,9 @@ let NERDTreeIgnore=[ '^\.git$','^\.svn$','^\.DS_Store$','^\.[\w\.]+\.swp$' ]
 let g:JSLintHighlightErrorLine = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Misc 
+" Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-colorscheme wombat256 
+"colorscheme wombat256
+colorscheme solarized
+set background=dark

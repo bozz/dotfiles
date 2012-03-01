@@ -1,4 +1,4 @@
-export PATH=$PATH:~/bin
+export PATH=$PATH:~/bin:~/node_modules/.bin
 
 # Colors from http://wiki.archlinux.org/index.php/Color_Bash_Prompt
 # misc
