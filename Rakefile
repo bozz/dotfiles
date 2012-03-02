@@ -4,7 +4,7 @@
 # which will prompt for confirmation.
 
 def copy_dotfiles
-  ignore = %w[README Rakefile]
+  ignore = %w[README Rakefile zsh]
   cwd = File.expand_path("../", __FILE__)
   target_dir = File.expand_path('~')
 
