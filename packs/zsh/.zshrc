@@ -34,6 +34,12 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+# enable color support of ls and also add handy aliases
+if [ -x /usr/local/bin/gdircolors ]; then
+    test -r ~/.dircolors && eval "$(gdircolors -b ~/.dircolors)" || eval "$(gdircolors -b)"
+    alias ls='gls --color=auto'
+fi
+
 # Customize to your needs...
 export PATH=$PATH:~/bin:~/node_modules/.bin
 
