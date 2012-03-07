@@ -45,11 +45,11 @@ BWHITE='\e[47m'
 # PS1="\n\u:\w \[$EBLACK\]\$(vcprompt)\[$NO_COLOR\] \n→ "
 
 # colors and prompt
-export DISPLAY=:0.0
-export TERM=xterm-color
-export CLICOLOR=true
-export LSCOLORS=true
-export LSCOLORS=DxGxcxdxCxegedabagacad
+#export DISPLAY=:0.0
+export TERM=xterm-256color
+#export CLICOLOR=true
+#export LSCOLORS=true
+#export LSCOLORS=DxGxcxdxCxegedabagacad
 PS1="\[$GREEN\]\u@\h\[$CYAN\]:\W\$ \[$EWHITE\]"
 
 # enable color support of ls and also add handy aliases
