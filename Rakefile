@@ -1,65 +1,161 @@
-# Copy files in same directory to ~/
-# (while ignoring dotfiles and files in ignore-array)
-# Files will be overwritten except those ending in '.local',
-# which will prompt for confirmation.
+# Copy files in same directory to
 
-def copy_dotfiles
-  ignore = %w[packs README Rakefile]
-  cwd = File.expand_path("../", __FILE__)
-  target_dir = File.expand_path('~')
+namespace :install do
+  desc "install base pack"
+  task :base do
+    copy_dotfiles(:base)
+  end
 
-  Dir.foreach(cwd) do |file|
-    unless ignore.include?(file) || file.index(/^\./)
-      if file.index(/.local|.before|.after$/) and File.exists?("#{target_dir}/.#{file}")
-        #puts "!!  Do you want to overwrite .#{file} (y/n) ?"
-        #confirm = gets.chomp
-        next #if confirm!='y'
-      end
-      cp_opts = File.directory?(file) ? '-rf' : ''
+  desc "install common shell pack"
+  task :common_shell do
+    copy_dotfiles(:common_shell)
+  end
 
-      file_path = "#{target_dir}/"
-      file_path += file.index(/bin/) ? "" : "."
-      file_path += file
+  desc "install bash pack"
+  task :bash => "install:common_shell" do
+    copy_dotfiles(:bash)
+  end
 
-      sh "cp #{cp_opts} #{file} #{file_path}"
+  desc "install vim pack"
+  task :vim do
+    copy_dotfiles(:vim)
+    FileUtils.cd(root_dir + "/.vim")
+    sh "ruby update_bundles"
+  end
+
+  desc "install zsh pack"
+  task :zsh => "install:common_shell" do
+    copy_dotfiles(:zsh)
+
+    puts "adding  #{root_dir}/.oh-my-zsh"
+    `git clone -q git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh`
+
+    # copy zsh theme
+    FileUtils.cp( File.join(dotfiles_dir, "packs", "zsh", "bozz.zsh-theme"), File.join(root_dir, ".oh-my-zsh", "themes", "bozz.zsh-theme"))
+  end
+
+  desc "install task pack"
+  task :task do
+    copy_dotfiles(:task)
+
+    # create ~/.task dir if doesn't exist
+    task_dir = File.join(root_dir, ".task")
+    unless File.directory?(task_dir)
+      FileUtils.mkdir(task_dir)
     end
+
+    # copy color theme
+    puts "adding #{root_dir}/.task/solarized-dark-256.theme"
+    FileUtils.cp( File.join(dotfiles_dir, "packs", "task", "solarized-dark-256.theme"), File.join(root_dir, ".task", "solarized-dark-256.theme"))
   end
 end
 
-desc "Clone Janus (vim configs) into ~/.vim"
-task :install_janus do
-  sh "git clone https://github.com/carlhuda/janus.git $HOME/.vim"
+namespace :uninstall do
+  desc "uninstall base pack"
+  task :base do
+    remove_dotfiles(:base)
+  end
+
+  desc "uninstall common shell pack"
+  task :common_shell do
+    remove_dotfiles(:common_shell)
+  end
+
+  desc "uninstall bash pack"
+  task :bash => "uninstall:common_shell" do
+    remove_dotfiles(:bash)
+  end
+
+  desc "uninstall vim pack"
+  task :vim do
+    remove_dotfiles(:vim)
+  end
+
+  desc "uninstall zsh pack"
+  task :zsh => "uninstall:common_shell" do
+    remove_dotfiles(:zsh)
+  end
+
+  desc "uninstall task pack"
+  task :task do
+    remove_dotfiles(:task)
+  end
 end
 
-desc "Update dotfiles"
-task :update do
-  puts "updating dotfiles..."
-  sh "cd $HOME/.vim && rake"
-
-  copy_dotfiles()
-end
-
-desc "Install or update dotfiles."
 task :default do
-  root_path = File.expand_path('~')
-
-  unless File.directory?("#{root_path}/.vim/janus")
-    puts "Found non-janus ~/.vim directory, overwrite ~/.vim, ~/.vimrc, ~/.gvimrc files? [y/n]"
-    confirm = gets.chomp
-    if confirm=='y'
-      sh "rm -rf $HOME/.vim $HOME/.vimrc $HOME/.gvimrc"
-    else
-      puts "aborting..."
-      exit
-    end
-  end
-
-  # if ~/.vim dosn't exists then install janus
-  unless File.directory?("#{root_path}/.vim")
-    sh "rake install_janus"
-  end
-
-  sh "rake update"
+  puts "Select task:"
+  puts `rake -T`
 end
 
+
+### Support Functions
+
+def dotfiles_dir
+  File.dirname(__FILE__)
+end
+
+def root_dir
+  File.expand_path('~')
+end
+
+def pack_files
+  {
+    :base => %w[
+      ackrc
+      gitconfig
+      jslintrc
+      tmux.conf
+    ],
+    :common_shell => %w[
+      aliases
+      dircolors
+    ],
+    :bash => %w[
+      bash_profile
+      bashrc
+      bash_history
+    ],
+    :vim => %w[
+      vimrc
+      vim
+      viminfo
+    ],
+    :zsh => %w[
+      zshrc
+      zsh_history
+      zsh-update
+      oh-my-zsh
+    ],
+    :task => %w[
+      taskrc
+    ]
+  }
+end
+
+
+def copy_dotfiles(pack)
+  pack_dir = File.join(dotfiles_dir, "packs", pack.to_s)
+  unless File.directory?(pack_dir)
+    puts "Error: could not find pack directory: #{pack_dir}"
+    exit
+  end
+
+  pack_files[pack].each do |file|
+    source_file = File.join(pack_dir, file)
+    if File.exists?(source_file)
+      puts "adding: " + File.join(root_dir, ".#{file}")
+      FileUtils.cp_r(source_file, File.join(root_dir, ".#{file}"))
+    end
+  end
+end
+
+def remove_dotfiles(pack)
+  pack_files[pack].each do |file|
+    source_file = File.join(root_dir, ".#{file}")
+    if File.exists?(source_file)
+      puts "removing: " + File.join(root_dir, ".#{file}")
+      FileUtils.rm_rf(source_file)
+    end
+  end
+end
 

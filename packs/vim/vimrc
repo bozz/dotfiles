@@ -1,0 +1,209 @@
+filetype plugin on
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
+set nofoldenable
+set nocompatible      " Use vim, no vi defaults
+set number            " Show line numbers
+set ruler             " Show line and column number
+syntax enable         " Turn on syntax highlighting allowing local overrides
+set encoding=utf-8    " Set default encoding to UTF-8
+
+""
+"" Whitespace
+""
+
+set nowrap                        " don't wrap lines
+set tabstop=2                     " a tab is two spaces
+set shiftwidth=2                  " an autoindent (with <<) is two spaces
+set expandtab                     " use spaces, not tabs
+set list                          " Show invisible characters
+set backspace=indent,eol,start    " backspace through everything in insert mode
+
+if exists("g:enable_mvim_shift_arrow")
+  let macvim_hig_shift_movement = 1 " mvim shift-arrow-keys
+endif
+
+" List chars
+set listchars=""                  " Reset the listchars
+set listchars=tab:\ \             " a tab should display as "  ", trailing whitespace as "."
+set listchars+=trail:.            " show trailing spaces as dots
+set listchars+=extends:>          " The character to show in the last column when wrap is
+                                  " off and the line continues beyond the right of the screen
+set listchars+=precedes:<         " The character to show in the last column when wrap is
+                                  " off and the line continues beyond the right of the screen
+
+""
+"" Searching
+""
+
+set hlsearch    " highlight matches
+set incsearch   " incremental searching
+set ignorecase  " searches are case insensitive...
+set smartcase   " ... unless they contain at least one capital letter
+
+""
+"" Wild settings
+""
+
+" TODO: Investigate the precise meaning of these settings
+" set wildmode=list:longest,list:full
+
+" Disable output and VCS files
+set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
+
+" change mapleader
+let mapleader = ","
+
+" nocomplcache stuff
+let g:neocomplcache_enable_at_startup = 1
+" Snippets still don't work the way I want - tab doesn't jump to next
+" placeholder.
+imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+let g:neocomplcache_enable_auto_select = 1
+let g:neocomplcache_auto_completion_start_length = 1
+let g:neocomplcache_enable_auto_select = 0
+
+set nocompatible
+set autoread
+
+let g:rails_menu=2
+let g:gist_clip_command = 'pbcopy'
+let g:gist_detect_filetype = 1
+let g:gist_open_browser_after_post = 1
+
+" Better surround
+let g:surround_40 = "(\r)"
+let g:surround_91 = "[\r]"
+let g:surround_60 = "<\r>"
+
+let g:acp_ignorecaseOption = 0
+
+let g:SuperTabLongestEnhanced = 1
+let g:SuperTabLongestHighlight = 1
+let g:SuperTabCrClosePreview = 1
+
+set completeopt=menu,menuone,preview
+set wildmode=longest,list:longest
+
+map gb <C-^>
+vmap gl :<C-U>!blame <C-R>=expand("%:p") <CR> <C-R>=line("'<") <CR> <C-R>=line("'>") <CR> <CR>
+vmap # :TComment<CR>
+map - :Tabularize hash
+map <C-l> :nohl
+map <leader>a :Tabularize /=>\?<cr>
+
+hi IncSearch term=reverse gui=underline guibg=Blue  guifg=Yellow
+hi    Search term=reverse gui=underline guibg=Black guifg=Yellow
+hi    Visual term=reverse cterm=reverse ctermbg=9 guibg=#555577 guifg=Black
+
+hi Pmenu      guifg=White guibg=Blue
+hi PmenuSel   gui=italic guifg=Yellow guibg=Blue
+hi PmenuSbar  ctermbg=Black guibg=Grey
+hi PmenuThumb guifg=Yellow guibg=Black
+
+if has("gui_running")
+  set lines=80 
+  set columns=120 
+  set number
+endif
+
+if has("gui_macvim")
+  " write on pretty much any event (including :q) 
+  set autowriteall
+  set tabpagemax=100
+  set guifont=Monofur:h20
+endif
+
+" Nice statusbar
+set laststatus=2
+set statusline=
+set statusline+=%f\                    " file name
+set statusline+=%h%1*%m%r%w%0*         " flags
+set statusline+=%=                     " right align
+set statusline+=%-14.(%l,%c%V%)\ %<%P  " offset
+
+autocmd BufNewFile,BufRead *.css set fdm=marker fmr={,}
+
+" Fuck tpope
+xmap s <Plug>VSurround
+
+set nobackup
+set noswapfile
+
+set numberwidth=5
+set path=$PWD/**
+
+" Use Node.js for JavaScript interpretation
+let $JS_CMD='node'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Key Mappings 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" map capital W to lower case - I ofter accidentally tiggered capital W
+command! W :w
+
+" convenient esc
+map! jj <ESC>
+
+" add ALT+j / ALT+k to move lines down / up (in visual mode)
+" nnoremap <A-j> :m+<CR>==
+" nnoremap <A-k> :m-2<CR>==
+" inoremap <A-j> <Esc>:m+<CR>==gi
+" inoremap <A-k> <Esc>:m-2<CR>==gi
+" vnoremap <A-j> :m'>+<CR>gv=gv
+" vnoremap <A-k> :m-2<CR>gv=gv
+
+" easy window navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+" jump to matching pairs easily, with tab
+nnoremap <Tab> %
+vnoremap <Tab> %
+
+" ZoomWin configuration
+map <Leader>zz :ZoomWin<CR>
+
+" map search / to 'ö'
+map ö /
+
+" add svn blame shortcut for selected text
+vmap gl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<")
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" NERDTree
+" Default mapping, <leader>n
+map <leader>n :NERDTreeToggle<CR>
+" show hidden files, too
+let NERDTreeShowHidden=1
+" Quit on opening files from the tree
+let NERDTreeQuitOnOpen=1
+" highlight the selected entry in the tree
+let NERDTreeHighlightCursorline=1
+" use a single click for everything
+let NERDTreeMouseMode=3
+" automatically CWD to root node
+let NERDTreeChDirMode=2
+" don't display these kinds of files
+let NERDTreeIgnore=[ '^\.git$','^\.svn$','^\.DS_Store$','^\.[\w\.]+\.swp$' ]
+
+" enable jslint
+let g:JSLintHighlightErrorLine = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Misc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"colorscheme desert
+"colorscheme wombat256
+"set t_Co=256
+"colorscheme solarized
+"set background=dark

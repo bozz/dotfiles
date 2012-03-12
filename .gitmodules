@@ -1,0 +1,3 @@
+[submodule "packs/solarized/osx-lion-terminal"]
+	path = packs/solarized/osx-lion-terminal
+	url = https://github.com/tomislav/osx-lion-terminal.app-colors-solarized.git
