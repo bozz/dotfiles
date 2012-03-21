@@ -43,6 +43,9 @@ fi
 # Customize to your needs...
 export PATH=$PATH:~/bin:~/node_modules/.bin
 
+# use vim as git/svn editor
+export EDITOR=vim
+
 # needed for rvm gem (Ruby Version Manager)
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
