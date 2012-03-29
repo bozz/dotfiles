@@ -172,6 +172,13 @@ map <C-l> <C-w>l
 nnoremap <Tab> %
 vnoremap <Tab> %
 
+" reselect visual block after indent/outdent
+vnoremap < <gv
+vnoremap > >gv
+
+" clear search highlights
+noremap <Leader><space> :nohls<CR>
+
 " ZoomWin configuration
 map <Leader>zz :ZoomWin<CR>
 
