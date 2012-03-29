@@ -61,6 +61,9 @@ fi
 # use vim as git/svn editor
 export EDITOR=vim
 
+# set vi command mode
+set -o vi
+
 source ~/.aliases
 
 # init bashmarks

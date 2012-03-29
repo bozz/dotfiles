@@ -46,6 +46,22 @@ export PATH=$PATH:~/bin:~/node_modules/.bin
 # use vim as git/svn editor
 export EDITOR=vim
 
+# set vi command mode
+bindkey -v
+
+# bind jj to ESC
+bindkey -M viins 'jj' vi-cmd-mode
+
+# function for displaying current vi mode
+function zle-line-init zle-keymap-select {
+    RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+    RPS2=$RPS1
+    zle reset-prompt 
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+
 # needed for rvm gem (Ruby Version Manager)
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
