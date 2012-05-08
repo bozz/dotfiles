@@ -26,8 +26,8 @@ if exists("g:enable_mvim_shift_arrow")
   let macvim_hig_shift_movement = 1 " mvim shift-arrow-keys
 endif
 
-set smartindent
-set autoindent
+" set smartindent
+" set autoindent
 
 " load indent file for the current filetype
 filetype indent on
@@ -84,6 +84,7 @@ let g:gist_open_browser_after_post = 1
 " Additional file type setup
 
 au BufNewFile,BufRead Jakefile set filetype=javascript
+au BufNewFile,BufRead *.ejs set filetype=html
 
 " Better surround
 let g:surround_40 = "(\r)"

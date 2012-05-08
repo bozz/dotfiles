@@ -30,6 +30,7 @@ git_bundles = %w{
   git://github.com/vim-scripts/vimwiki.git
   git://github.com/msanders/snipmate.vim.git
   git://github.com/scrooloose/snipmate-snippets.git
+  git://github.com/kien/ctrlp.vim.git
   git://github.com/vim-scripts/ZoomWin.git
 }
 
