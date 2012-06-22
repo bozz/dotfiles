@@ -24,7 +24,7 @@ alias ropen='open http://localhost:3001'
 
 # git
 alias gs='git status'
-alias glog='git log --name-status'
+alias glog='git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit'
 
 # svn
 alias sup='svn update'
