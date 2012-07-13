@@ -28,10 +28,13 @@ git_bundles = %w{
   git://github.com/Shougo/neocomplcache.git
   git://github.com/ecomba/vim-ruby-refactoring.git
   git://github.com/vim-scripts/vimwiki.git
+  git://github.com/vim-scripts/ZoomWin.git
   git://github.com/msanders/snipmate.vim.git
   git://github.com/scrooloose/snipmate-snippets.git
+  git://github.com/Lokaltog/vim-powerline.git
   git://github.com/kien/ctrlp.vim.git
-  git://github.com/vim-scripts/ZoomWin.git
+  git://github.com/myusuf3/numbers.vim.git
+  git://github.com/ervandew/supertab.git
 }
 
 require 'fileutils'
