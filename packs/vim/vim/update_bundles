@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
 
-#  git://github.com/astashov/vim-ruby-debugger.git
+# git://github.com/astashov/vim-ruby-debugger.git
+# git://github.com/kana/vim-textobj-user.git
+# git://github.com/nelstrom/vim-textobj-rubyblock.git
+# git://github.com/ecomba/vim-ruby-refactoring.git
+# git://github.com/tpope/vim-cucumber.git
 
 git_bundles = %w{
   git://github.com/godlygeek/tabular.git
@@ -8,7 +12,6 @@ git_bundles = %w{
   git://github.com/scrooloose/nerdtree.git
   git://github.com/timcharper/textile.vim.git
   git://github.com/tomtom/tcomment_vim.git
-  git://github.com/tpope/vim-cucumber.git
   git://github.com/tpope/vim-endwise.git
   git://github.com/tpope/vim-fugitive.git
   git://github.com/tpope/vim-git.git
@@ -17,22 +20,18 @@ git_bundles = %w{
   git://github.com/tpope/vim-repeat.git
   git://github.com/tpope/vim-surround.git
   git://github.com/tpope/vim-vividchalk.git
+  git://github.com/altercation/vim-colors-solarized.git
   git://github.com/tsaleh/vim-matchit.git
   git://github.com/tsaleh/vim-tmux.git
   git://github.com/vim-ruby/vim-ruby.git
   git://github.com/vim-scripts/IndexedSearch.git
   git://github.com/vim-scripts/jQuery.git
-  git://github.com/kana/vim-textobj-user.git
-  git://github.com/nelstrom/vim-textobj-rubyblock.git
+  git://github.com/vim-scripts/ZoomWin.git
   git://github.com/jgdavey/vim-blockle.git
   git://github.com/Shougo/neocomplcache.git
-  git://github.com/ecomba/vim-ruby-refactoring.git
   git://github.com/vim-scripts/vimwiki.git
-  git://github.com/vim-scripts/ZoomWin.git
   git://github.com/msanders/snipmate.vim.git
   git://github.com/scrooloose/snipmate-snippets.git
-  git://github.com/Lokaltog/vim-powerline.git
-  git://github.com/kien/ctrlp.vim.git
   git://github.com/myusuf3/numbers.vim.git
   git://github.com/ervandew/supertab.git
 }
