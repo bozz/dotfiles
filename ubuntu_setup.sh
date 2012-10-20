@@ -15,3 +15,7 @@ make install
 cd ..
 rm -rf tmux-1.6
 rm tmux-1.6.tar.gz
+
+# setup solarized colors:
+# https://github.com/altercation/solarized/tree/master/vim-colors-solarized
+# https://github.com/sigurdga/gnome-terminal-colors-solarized
