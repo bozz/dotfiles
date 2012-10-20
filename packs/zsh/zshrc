@@ -14,6 +14,7 @@ source $HOME/.aliases
 
 alias tree='nocorrect tree'
 alias grunt='nocorrect grunt'
+alias json='nocorrect json'
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -49,10 +50,11 @@ export PATH=$PATH:~/bin:~/node_modules/.bin
 # use vim as git/svn editor
 export EDITOR=vim
 
-# set vi command mode
-bindkey -v
+# added this because jekyll would fail otherwise bei 'umlaute'
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
-# bind jj to ESC
+bindkey -v
 bindkey -M viins 'jj' vi-cmd-mode
 
 function zle-line-init zle-keymap-select {
