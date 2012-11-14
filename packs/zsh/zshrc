@@ -38,16 +38,23 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # enable color support of ls and also add handy aliases
-if [ -x /usr/local/bin/gdircolors ]; then
-    test -r ~/.dircolors && eval "$(gdircolors -b ~/.dircolors)" || eval "$(gdircolors -b)"
-    alias ls='gls --color=auto'
+# use gdircolors for mac...
+#if [ -x /usr/local/bin/gdircolors ]; then
+#    test -r ~/.dircolors && eval "$(gdircolors -b ~/.dircolors)" || eval "$(gdircolors -b)"
+#    alias ls='gls --color=auto'
+#fi
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
 fi
 
 # Customize to your needs...
-export PATH=$PATH:~/bin:~/node_modules/.bin
+export PATH=$PATH:~/bin:~/node/bin
 
 # use vim as git/svn editor
 export EDITOR=vim
+
+export TERM=xterm-256color
 
 # set vi command mode
 bindkey -v
