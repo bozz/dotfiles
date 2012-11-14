@@ -14,6 +14,7 @@ source $HOME/.aliases
 
 alias tree='nocorrect tree'
 alias grunt='nocorrect grunt'
+alias json='nocorrect json'
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -59,7 +60,11 @@ export TERM=xterm-256color
 # set vi command mode
 bindkey -v
 
-# bind jj to ESC
+# added this because jekyll would fail otherwise bei 'umlaute'
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+bindkey -v
 bindkey -M viins 'jj' vi-cmd-mode
 
 function zle-line-init zle-keymap-select {
