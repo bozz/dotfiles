@@ -98,11 +98,11 @@ ORPHAN 48;5;235;38;5;160 # symlink to nonexistent file, or non-stat'able file
 SETUID 48;5;160;38;5;230 # file that is setuid (u+s)
 SETGID 48;5;136;38;5;230 # file that is setgid (g+s)
 CAPABILITY 30;41 # file with capability
-STICKY_OTHER_WRITABLE 48;5;125;38;5;230 # dir that is sticky and other-writable (+t,o+w)
-OTHER_WRITABLE 48;5;234;38;5;33 # dir that is other-writable (o+w) and not sticky
+STICKY_OTHER_WRITABLE 48;5;64;38;5;230 # dir that is sticky and other-writable (+t,o+w)
+OTHER_WRITABLE 48;5;235;38;5;33 # dir that is other-writable (o+w) and not sticky
 STICKY 48;5;33;38;5;230 # dir with the sticky bit set (+t) and not other-writable
 # This is for files with execute permission:
-EXEC 01;38;5;125
+EXEC 01;38;5;64
 
 ## Archives or compressed (violet + bold for compression)
 .tar    00;38;5;61
@@ -173,54 +173,25 @@ EXEC 01;38;5;125
 .ttl             01;38;5;245
 .nt              01;38;5;245
 .torrent         01;38;5;245
+.xml             01;38;5;245
 *Makefile        01;38;5;245
 *Rakefile        01;38;5;245
-*Jakefile        01;38;5;245
 *build.xml       01;38;5;245
 *rc              01;38;5;245
 *1               01;38;5;245
 .nfo             01;38;5;245
-.textile         01;38;5;245
 *README          01;38;5;245
 *README.txt      01;38;5;245
 *readme.txt      01;38;5;245
-*README.md       01;38;5;245
+.md              01;38;5;245
 *README.markdown 01;38;5;245
-*ini             01;38;5;245
-*yml             01;38;5;245
-*cfg             01;38;5;245
-*conf            01;38;5;245
-
-
-# Source text
-.h          00;38;5;64
-.c          00;38;5;64
-.C          00;38;5;64
-.cc         00;38;5;64
-.cxx        00;38;5;64
-.objc       00;38;5;64
-.sh         00;38;5;64
-.csh        00;38;5;64
-.zsh        00;38;5;64
-.el         00;38;5;64
-.vim        00;38;5;64
-.java       00;38;5;64
-.pl         00;38;5;64
-.pm         00;38;5;64
-.py         00;38;5;64
-.rb         00;38;5;64
-.erb        00;38;5;64
-.hs         00;38;5;64
-.php        00;38;5;64
-.htm        00;38;5;64
-.html       00;38;5;64
-.shtml      00;38;5;64
-.rhtml      00;38;5;64
-.xml        00;38;5;64
-.rdf        00;38;5;64
-.css        00;38;5;64
-.js         00;38;5;64
-.man        00;38;5;64
+.ini             01;38;5;245
+.yml             01;38;5;245
+.cfg             01;38;5;245
+.conf            01;38;5;245
+.c               01;38;5;245
+.cpp             01;38;5;245
+.cc              01;38;5;245
 
 # "unimportant" files as logs and backups (base01)
 .log        00;38;5;240
@@ -282,6 +253,7 @@ EXEC 01;38;5;125
 .flv    01;38;5;166
 .gl     01;38;5;166
 .m2ts   01;38;5;166
+.divx   01;38;5;166
 # http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
 .axv 01;38;5;166
 .anx 01;38;5;166
