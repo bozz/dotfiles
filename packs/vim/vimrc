@@ -1,6 +1,6 @@
-filetype plugin on
-"call pathogen#runtime_append_all_bundles()
-"call pathogen#helptags()
+" filetype plugin on
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
 
 set nofoldenable
 set nocompatible      " Use vim, no vi defaults
@@ -11,51 +11,43 @@ set encoding=utf-8    " Set default encoding to UTF-8
 
 set sh=/bin/sh
 
-""
-"" Vundle
-""
 
-set nocompatible               " be iMproved
-filetype off                   " required!
+" Vundle Setup
+"filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+"set rtp+=~/.vim/bundle/vundle/
+"call vundle#rc()
 
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
+"Bundle 'gmarik/vundle'
 
 " My Bundles here:
 "
 " original repos on github
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-surround'
-"Bundle 'kien/ctrlp'
-Bundle 'torandu/vim-bufexplorer'
-Bundle 'scrooloose/nerdtree'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'Shougo/neocomplcache'
-Bundle 'ervandew/supertab'
-Bundle 'tsaleh/vim-tmux'
-Bundle 'pangloss/vim-javascript'
-"Bundle 'vim-ruby/vim-ruby.git'
-"Bundle 'tpope/vim-rails.git'
+"Bundle 'tpope/vim-fugitive'
+"Bundle 'tpope/vim-surround'
+"Bundle 'pangloss/vim-javascript'
+"Bundle 'scrooloose/nerdtree'
+"Bundle 'tomtom/tcomment_vim'
+"Bundle 'tsaleh/vim-matchit'
+"Bundle 'tsaleh/vim-tmux'
+"Bundle 'Shougo/neocomplcache'
+"Bundle 'firat/vim-bufexplorer'
+"Bundle 'ervandew/supertab'
+"" vim-scripts repos
+"Bundle 'ZoomWin'
+"Bundle 'jQuery'
 
-" vim-scripts repos
-Bundle 'ZoomWin'
-Bundle 'IndexedSearch'
-Bundle 'vimwiki'
-Bundle 'jQuery'
-
-filetype plugin indent on     " required!
+"filetype plugin indent on     " required!
 
 ""
 "" Whitespace
 ""
 
 set nowrap                        " don't wrap lines
-set tabstop=2                     " a tab is two spaces
-set shiftwidth=2                  " an autoindent (with <<) is two spaces
+set tabstop=4                     " a tab is two spaces
+set shiftwidth=4                  " an autoindent (with <<) is two spaces
 set expandtab                     " use spaces, not tabs
 set list                          " Show invisible characters
 set backspace=indent,eol,start    " backspace through everything in insert mode
@@ -68,7 +60,7 @@ endif
 " set autoindent
 
 " load indent file for the current filetype
-" filetype indent on
+filetype indent on
 
 " List chars
 set listchars=""                  " Reset the listchars
@@ -94,10 +86,14 @@ set smartcase   " ... unless they contain at least one capital letter
 
 " TODO: Investigate the precise meaning of these settings
 " set wildmode=list:longest,list:full
-set wildmode=longest,list:longest
 
 " Disable output and VCS files
 set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
+
+" custom ignore directories for ctrlp plugin
+" let g:ctrlp_custom_ignore = {
+"   \ 'dir': '\v[\/]\.(git|hg|svn)$'
+" }
 
 " change mapleader
 let mapleader = ","
@@ -106,7 +102,7 @@ let mapleader = ","
 let g:neocomplcache_enable_at_startup = 1
 " Snippets still don't work the way I want - tab doesn't jump to next
 " placeholder.
-" imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 let g:neocomplcache_enable_auto_select = 1
 let g:neocomplcache_auto_completion_start_length = 1
@@ -144,8 +140,10 @@ vmap gl :<C-U>!blame <C-R>=expand("%:p") <CR> <C-R>=line("'<") <CR> <C-R>=line("
 vmap # :TComment<CR>
 map - :Tabularize hash
 map <C-l> :nohl
-map <leader>a :Tabularize /=>\?<cr>
-imap <Tab> <C-P>
+" map <leader>a :Tabularize /=>\?<cr>
+
+" map this to custom brandwatch.vim (related file)
+map <leader>a :AC<cr>
 
 hi IncSearch term=reverse gui=underline guibg=Blue  guifg=Yellow
 hi    Search term=reverse gui=underline guibg=Black guifg=Yellow
@@ -171,20 +169,13 @@ endif
 
 " Nice statusbar
 set laststatus=2
-" set statusline=
-" set statusline+=%f\                    " file name
-" set statusline+=%h%1*%m%r%w%0*         " flags
-" set statusline+=%=                     " right align
-" set statusline+=%-14.(%l,%c%V%)\ %<%P  " offset
-
-let g:Powerline_symbols='fancy'      " Powerline
-let g:Powerline_theme='skwp'
-let g:Powerline_colorscheme='skwp'   " Powerline
+set statusline=
+set statusline+=%f\                    " file name
+set statusline+=%h%1*%m%r%w%0*         " flags
+set statusline+=%=                     " right align
+set statusline+=%-14.(%l,%c%V%)\ %<%P  " offset
 
 autocmd BufNewFile,BufRead *.css set fdm=marker fmr={,}
-
-" Fuck tpope
-xmap s <Plug>VSurround
 
 set nobackup
 set noswapfile
@@ -274,6 +265,6 @@ let g:JSLintHighlightErrorLine = 1
 
 "colorscheme desert
 "colorscheme wombat256
-set t_Co=256
+"set t_Co=256
 "colorscheme solarized
 "set background=dark

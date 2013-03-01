@@ -14,7 +14,6 @@ source $HOME/.aliases
 
 alias tree='nocorrect tree'
 alias grunt='nocorrect grunt'
-alias json='nocorrect json'
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -39,11 +38,6 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # enable color support of ls and also add handy aliases
-# use gdircolors for mac...
-#if [ -x /usr/local/bin/gdircolors ]; then
-#    test -r ~/.dircolors && eval "$(gdircolors -b ~/.dircolors)" || eval "$(gdircolors -b)"
-#    alias ls='gls --color=auto'
-#fi
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
@@ -60,11 +54,7 @@ export TERM=xterm-256color
 # set vi command mode
 bindkey -v
 
-# added this because jekyll would fail otherwise bei 'umlaute'
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-
-bindkey -v
+# bind jj to ESC
 bindkey -M viins 'jj' vi-cmd-mode
 
 function zle-line-init zle-keymap-select {

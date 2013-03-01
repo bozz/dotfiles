@@ -17,20 +17,14 @@ function fd() {
 alias profile='vim ~/.bashrc.local'
 alias papply='vim ~/.bashrc.local'
 
-# rails
-alias ss='rails server -p 3001'
-alias tlog='tail -f log/development.log'
-alias ropen='open http://localhost:3001'
-
 # git
 alias gs='git status'
-
 alias gsl='git stash list'
 alias gb='git branch'
-alias glog='git log --pretty=format:"%C(yellow)%h%C(reset)%x09%an%x09%ad%x09%s" --date=short --reverse'
+alias glog='git --no-pager log --pretty=format:"%C(yellow)%h%C(reset)%x09%an%x09%ad%x09%s" --date=short --reverse'
 
 function gshow() {
-    git show --stat $1
+    git --no-pager show --stat $1
 }
 # function gbin() {
 #    echo branch \($1\) has these commits and \($(parse_git_branch)\) does not 
