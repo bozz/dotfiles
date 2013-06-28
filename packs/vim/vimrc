@@ -268,3 +268,8 @@ let g:JSLintHighlightErrorLine = 1
 "set t_Co=256
 "colorscheme solarized
 "set background=dark
+
+" fix column highlighting for vim-gitgutter
+highlight clear SignColumn
+map ü :GitGutterNextHunk<CR>
+map Ü :GitGutterPrevHunk<CR>
