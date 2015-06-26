@@ -1,0 +1,43 @@
+# Blade Template Snippets
+
+snippet yield "Blade Yield"
+@yield('$1')
+endsnippet
+
+snippet extends "Blade Extends"
+@extends('$1')
+endsnippet
+
+snippet section "Blade Section"
+@section('$1')
+
+$2	
+
+@stop
+endsnippet
+
+snippet if "Blade If"
+@if ($1)
+	$2
+@endif
+endsnippet
+
+snippet ife "Blade If-Else"
+@if ($1)
+	$2
+@else
+	$3
+@endif
+endsnippet
+
+snippet unless "Blade Unless"
+@unless ($1)
+	$2
+@endunless
+endsnippet
+
+snippet foreach "Blade Foreach"
+@foreach($1 as $2)
+	$3
+@endforeach
+endsnippet
