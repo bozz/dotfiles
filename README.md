@@ -1,5 +1,13 @@
-## Dotfiles ##
+Dotfiles
+========
 
-Dotfiles are organized into separate "packs" for different purposes. This allows installing only desired packs and not everything.
+My personal dotfiles. 
 
-Use "rake" to install/uninstall packs.
+Currently using [kody](https://github.com/jh3y/kody) for installing and managing files. I have kody installed globally with `npm install -g kody`.
+
+# usage
+
+1. clone repo
+2. run `kody` within dotfiles directory.
+3. select desired options and run...
+

@@ -1,0 +1,59 @@
+"*":
+  "atom-autocomplete-php":
+    binComposer: "/Users/bsearles/bin/composer"
+    binPhp: "/usr/bin/php"
+  "atom-beautify":
+    _analyticsUserId: "9914b4b7-3da6-4afb-8a35-a23c3923ce09"
+    general:
+      _analyticsUserId: "2466ba24-4586-45d3-a299-f64459158555"
+  core:
+    disabledPackages: [
+      "atom-react-native-css"
+      "language-blade"
+      "atom-autocomplete-php"
+      "blade-snippets"
+      "dash"
+      "linter"
+    ]
+    telemetryConsent: "no"
+    themes: [
+      "solarized-dark-ui"
+      "solarized-dark-syntax"
+    ]
+  editor:
+    invisibles: {}
+  "exception-reporting":
+    userId: "0d3c4b7c-5aec-ae2c-f7eb-f8e48e2c6361"
+  "git-plus":
+    general:
+      _analyticsUserId: "b2315bdd-44ac-4139-9f5c-4632fe253037"
+  linter: {}
+  "linter-eslint":
+    fixOnSave: true
+    globalNodePath: "/usr/local"
+  "linter-jshint":
+    disableWhenNoJshintrcFileInPath: true
+  "linter-php":
+    executablePath: "/usr/bin/php"
+  "linter-ui-default":
+    panelHeight: 104
+    showPanel: true
+  minimap:
+    plugins:
+      "highlight-selected": true
+      "highlight-selectedDecorationsZIndex": 0
+  "tree-view":
+    hideVcsIgnoredFiles: true
+  "vim-mode-plus":
+    notifiedCoffeeScriptNoLongerSupportedToExtendVMP: true
+  "vim-mode-plus-ex-mode":
+    notifiedUseExMode: true
+  welcome:
+    showOnStartup: false
+".blade.html.php.text":
+  editor:
+    commentEnd: " --}}"
+    commentStart: "{{-- "
+".html.mustache.text":
+  editor:
+    autoIndent: false

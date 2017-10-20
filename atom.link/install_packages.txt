@@ -1,0 +1,9 @@
+
+// make backup of packages with:
+
+apm list --installed --bare > ~/.atom/package.list
+
+// restore installed packages from list:
+
+apm install --package-file ~/.atom/package.list
+
