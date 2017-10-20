@@ -1,8 +1,5 @@
 .DS_Store
-.Trash
-.bundle
 tmp/**/*
-.swp
-.svn
 vim/tmp
 vim/vim
+src/node_modules
