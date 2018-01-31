@@ -44,8 +44,7 @@
       "highlight-selectedDecorationsZIndex": 0
   "tree-view":
     hideVcsIgnoredFiles: true
-  "vim-mode-plus":
-    notifiedCoffeeScriptNoLongerSupportedToExtendVMP: true
+  "vim-mode-plus": {}
   "vim-mode-plus-ex-mode":
     notifiedUseExMode: true
   welcome:

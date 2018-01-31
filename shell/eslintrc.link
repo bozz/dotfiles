@@ -39,19 +39,19 @@
         "no-undef":           2,
         "no-undefined":       2,
         "comma-dangle":       [ 2, "never" ],
-        "quotes":             [ 2, "single" ],
+        // "quotes":             [ 2, "single" ],
         "semi":               [ 2, "always" ],
         "guard-for-in":       2,
         "no-eval":            2,
         "no-with":            2,
         "valid-typeof":       2,
-        "no-unused-vars":     2,
+        "no-unused-vars":     0,
         "no-continue":        1,
         "no-extra-semi":      1,
         "no-unreachable":     1,
         "no-unused-expressions": 1,
-        "no-magic-numbers":   1,
         "max-len":            0,
         "react/prefer-es6-class": 1,
+        "no-console":         0
     }
 }
