@@ -54,4 +54,6 @@ bind -r H resize-pane -L 5
 # Sane scrolling
 setw -g mouse on
 
+# source-file "${HOME}/.tmux-themepack/powerline/default/yellow.tmuxtheme"
+
 set-option -g status-right '[#h]  #(date +"%d.%m %H:%M") '

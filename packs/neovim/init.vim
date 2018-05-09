@@ -33,77 +33,58 @@ filetype off            " required!
 "                                  Plugins                                   "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Specify a directory for plugins
-" - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
+set rtp+=~/.vim/bundle/vundle/
+call vundle#begin()
+
+" let Vundle manage Vundle
+" required!
+Plugin 'gmarik/Vundle.vim'
 
 "===> essential -----------------------------------------------------
-Plug 'scrooloose/nerdtree'
-Plug 'junegunn/fzf', { 'dir': '~/.vim/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'mileszs/ack.vim'            " plugin for ack and also ag (silver searcher)
-Plug 'w0rp/ale'                   " asynchronous lint engine
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'jlanzarotta/bufexplorer'
+Plugin 'tpope/vim-fugitive'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'tpope/vim-surround'
+Plugin 'jlanzarotta/bufexplorer'
 
 "===> autocomplete / snippets  --------------------------------------
-"Plugin 'valloric/YouCompleteMe'
-" Plug 'ervandew/supertab'
-Plug 'townk/vim-autoclose'
-Plug 'alvan/vim-closetag'
-Plug 'nathanaelkane/vim-indent-guides'
-"Plug 'epilande/vim-es2015-snippets'
-"Plug 'epilande/vim-react-snippets'
-"Plug 'SirVer/ultisnips'
+Plugin 'valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
+Plugin 'ervandew/supertab'
 
 "===> html / css ----------------------------------------------------
-" Plugin 'kogakure/vim-sparkup'       " zencoding
-"Plugin 'cakebaker/scss-syntax.vim'  " scss syntax
+Plugin 'kogakure/vim-sparkup'       " zencoding
+Plugin 'cakebaker/scss-syntax.vim'  " scss syntax
 
 "===> javascript  ---------------------------------------------------
-" Plugin 'othree/yajs.vim'            " js syntax
-Plug 'pangloss/vim-javascript'      " js syntax
-"Plugin 'othree/javascript-libraries-syntax.vim'
-Plug 'mxw/vim-jsx'                " react jsx syntax
-Plug 'moll/vim-node'
-"Plugin 'marijnh/tern_for_vim'
+Plugin 'othree/yajs.vim'            " js syntax
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'mxw/vim-jsx'                " react jsx syntax
+" Plugin 'moll/vim-node'
 
 "===> php -----------------------------------------------------------
-"Plugin 'StanAngeloff/php.vim'       " php syntax
-"Plugin 'xsbeats/vim-blade'          " laravel php template syntax
+Plugin 'StanAngeloff/php.vim'       " php syntax
+Plugin 'xsbeats/vim-blade'          " laravel php template syntax
 
 "===> misc ----------------------------------------------------------
-"Plug 'henrik/vim-indexed-search'  " displays number matches in searches
-" Plug 'altercation/vim-colors-solarized'
-Plug 'crusoexia/vim-monokai'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'embear/vim-localvimrc'
-" Plug 'junegunn/goyo.vim'
-" Plug 'reedes/vim-pencil'
+Plugin 'rking/ag.vim'               " silver searcher (ack replacement)
+Plugin 'henrik/vim-indexed-search'  " displays number matches in searches
+Plugin 'altercation/vim-colors-solarized'
 
 " vim-scripts repos
-"Plug 'ZoomWin'
-" Plug 'vimwiki'
+Plugin 'ZoomWin'
+" Plugin 'vimwiki'
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  let g:deoplete#enable_at_startup = 1
-  " deoplete tab-complete
-  inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-endif
-
-" Initialize plugin system
-call plug#end()
+call vundle#end()
+filetype plugin indent on     " required!
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              Plugin Settings                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"===> ctrlp ---------------------------------------------------------
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 "===> nerdtree ------------------------------------------------------
 map <leader>n :NERDTreeToggle<CR>       " Default mapping, <leader>n
@@ -115,76 +96,23 @@ let NERDTreeChDirMode=2                 " automatically CWD to root node
 let NERDTreeIgnore=[ '^\.git$','^\.svn$','^\.DS_Store$','^\.[\w\.]+\.swp$' ]
 let g:NERDTreeDirArrows=0               " don't display fancy arrows
 
-"===> fzf -----------------------------------------------------------
-nmap <Leader>f :Files<CR>
-
-"===> ctrlp ---------------------------------------------------------
-" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-
-"===> ack -----------------------------------------------------------
-
-" function wrapper for :Ack command in order to prevent leaking results
-" to terminal (see https://github.com/mileszs/ack.vim/issues/18)
-function Ag(string) abort
-  let saved_shellpipe = &shellpipe
-  let &shellpipe = '>'
-  try
-    execute 'Ack!' shellescape(a:string, 1)
-  finally
-    let &shellpipe = saved_shellpipe
-  endtry
-endfunction
-
-nmap <Leader>a :call Ag("")<left><left>
-
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-
-"===> ale -----------------------------------------------------------
-let g:ale_set_loclist = 0           " disable loclist
-let g:ale_set_quickfix = 1          " enable quickfix list
-let g:ale_open_list = 1             " show list
-let g:ale_lint_on_enter = 0         " don't lint right after opening
-let g:ale_lint_on_text_changed = 'never'  " only lint on save
-" let g:ale_linters = {
-" \   'javascript': ['standard'],
-" \}
-
-"===> vim-indent-guides ---------------------------------------------
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black   ctermbg=black
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey ctermbg=black
-
-"===> syntastic -----------------------------------------------------
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-"let g:syntastic_javascript_checkers = ['eslint']
-
-"===> commentary.vim ------------------------------------------------
-map ä :Commentary<CR>
+"===> tcomment_vim --------------------------------------------------
+vmap # :TComment<CR>
 
 "===> vim-surround --------------------------------------------------
-"xmap s <Plug>VSurround                  " Fuck tpope (vim-surround)
+xmap s <Plug>VSurround                  " Fuck tpope (vim-surround)
 
 " Better surround
-"let g:surround_40 = "(\r)"
-"let g:surround_91 = "[\r]"
-"let g:surround_60 = "<\r>"
+let g:surround_40 = "(\r)"
+let g:surround_91 = "[\r]"
+let g:surround_60 = "<\r>"
 
 "===> youcompleteme -------------------------------------------------
 " YouCompleteMe and UltiSnips compatibility, with the helper of supertab
 " let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 " let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
-"let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
-"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 "===> ultisnips -----------------------------------------------------
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -199,45 +127,6 @@ let g:SuperTabCrMapping                = 0
 
 "===> vim-jsx -------------------------------------------------------
 let g:jsx_ext_required = 0              " Allow JSX in normal JS files
-
-"===> powerline -----------------------------------------------------
-set guifont=Droid\ Sans\ Mono\ for\ Powerline:h14
-let g:airline_powerline_fonts = 1
-" let g:airline_solarized_bg='dark'
-let g:airline_theme='minimalist'
-" let g:Powerline_symbols = 'fancy'
-" set fillchars+=stl:\ ,stlnc:\
-" let g:airline#extensions#ale#enabled = 1  " enable 'ale' integration
-
-"===> localvimrc ----------------------------------------------------
-let g:localvimrc_persistent=2
-
-"===> goyo ----------------------------------------------------------
-function! s:goyo_enter()
-  silent !tmux set status off
-  silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-  set spell noci nosi noai nolist noshowmode noshowcmd
-  set complete+=s
-  set bg=light
-  set wrap
-  if !has('gui_running')
-    let g:solarized_termcolors=256
-  endif
-  colors solarized
-endfunction
-
-function! s:goyo_leave()
-  silent !tmux set status on
-  silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-  set showmode
-  set showcmd
-  set scrolloff=5
-  set nowrap
-  set bg=dark
-endfunction
-
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 "===> zoomwin -------------------------------------------------------
 map <Leader>zz :ZoomWin<CR>
@@ -260,8 +149,8 @@ au BufNewFile,BufRead *.css set fdm=marker fmr={,}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nowrap                        " don't wrap lines
-set tabstop=2                     " a tab is two spaces
-set shiftwidth=2                  " an autoindent (with <<) is two spaces
+set tabstop=4                     " a tab is two spaces
+set shiftwidth=4                  " an autoindent (with <<) is two spaces
 set expandtab                     " use spaces, not tabs
 set list                          " Show invisible characters
 set backspace=indent,eol,start    " backspace through everything in insert mode
@@ -350,9 +239,5 @@ if v:version >= 700
 endif
 
 " set t_Co=256
-" set term=xterm-256color
-" set termencoding=utf-8
-" set termguicolors
-
-colorscheme monokai
-
+colorscheme solarized
+set background=dark
