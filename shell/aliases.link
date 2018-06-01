@@ -27,7 +27,7 @@ alias gs='git status'
 
 alias gsl='git stash list'
 alias gb='git branch'
-alias glog='git --no-pager log --pretty=format:"%C(yellow)%h%C(reset)%x09%an%x09%ad%x09%s" --date=short --reverse'
+alias glog='git --no-pager log --pretty=format:"%Creset* %C(bold yellow)%h %C(cyan)%ad%Cred%d %Creset%s%C(green) [%cn]" --decorate --date=short --reverse'
 alias gundolast='git reset --soft HEAD~1; git reset HEAD .'
 
 function gshow() {
