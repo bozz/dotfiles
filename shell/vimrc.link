@@ -72,6 +72,9 @@ Plug 'mxw/vim-jsx'                " react jsx syntax
 Plug 'moll/vim-node'
 "Plugin 'marijnh/tern_for_vim'
 
+"===> rust ----------------------------------------------------------
+Plug 'rust-lang/rust.vim'
+
 "===> php -----------------------------------------------------------
 "Plugin 'StanAngeloff/php.vim'       " php syntax
 "Plugin 'xsbeats/vim-blade'          " laravel php template syntax
@@ -84,8 +87,9 @@ Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'embear/vim-localvimrc'
-" Plug 'junegunn/goyo.vim'
-" Plug 'reedes/vim-pencil'
+Plug 'junegunn/goyo.vim'
+Plug 'reedes/vim-pencil'
+Plug 'tpope/vim-markdown'
 
 " vim-scripts repos
 "Plug 'ZoomWin'
@@ -147,9 +151,10 @@ let g:ale_set_quickfix = 1          " enable quickfix list
 let g:ale_open_list = 1             " show list
 let g:ale_lint_on_enter = 0         " don't lint right after opening
 let g:ale_lint_on_text_changed = 'never'  " only lint on save
-" let g:ale_linters = {
-" \   'javascript': ['standard'],
-" \}
+let g:ale_fix_on_save = 1
+
+let g:ale_linters = {'javascript': ['eslint']}
+let g:ale_fixers = {'javascript': ['eslint']}
 
 "===> vim-indent-guides ---------------------------------------------
 let g:indent_guides_enable_on_vim_startup = 1
@@ -213,34 +218,44 @@ let g:airline_theme='minimalist'
 let g:localvimrc_persistent=2
 
 "===> goyo ----------------------------------------------------------
-function! s:goyo_enter()
-  silent !tmux set status off
-  silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-  set spell noci nosi noai nolist noshowmode noshowcmd
-  set complete+=s
-  set bg=light
-  set wrap
-  if !has('gui_running')
-    let g:solarized_termcolors=256
-  endif
-  colors solarized
-endfunction
+" function! s:goyo_enter()
+"   silent !tmux set status off
+"   silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+"   set spell noci nosi noai nolist noshowmode noshowcmd
+"   set complete+=s
+"   set bg=light
+"   set wrap
+"   if !has('gui_running')
+"     let g:solarized_termcolors=256
+"   endif
+"   colors solarized
+" endfunction
 
-function! s:goyo_leave()
-  silent !tmux set status on
-  silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-  set showmode
-  set showcmd
-  set scrolloff=5
-  set nowrap
-  set bg=dark
-endfunction
+" function! s:goyo_leave()
+"   silent !tmux set status on
+"   silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+"   set showmode
+"   set showcmd
+"   set scrolloff=5
+"   set nowrap
+"   set bg=dark
+" endfunction
 
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
+" autocmd! User GoyoEnter nested call <SID>goyo_enter()
+" autocmd! User GoyoLeave nested call <SID>goyo_leave()
+let g:goyo_width = 90
 
 "===> zoomwin -------------------------------------------------------
 map <Leader>zz :ZoomWin<CR>
+
+
+"===> journal
+autocmd VimEnter *.jrnl $pu=strftime('%n# %a, %d.%m.%Y %T%n%n')
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType text         call pencil#init()
+augroup END
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -250,6 +265,7 @@ map <Leader>zz :ZoomWin<CR>
 " Additional file type setup
 au BufNewFile,BufRead Jakefile set filetype=javascript
 au BufNewFile,BufRead *.ejs set filetype=html
+au BufNewFile,BufRead *.jrnl set filetype=markdown
 au BufNewFile,BufRead *.hogan set filetype=html
 au BufNewFile,BufRead *.blade.php set filetype=html.blade
 au BufNewFile,BufRead *.css set fdm=marker fmr={,}
