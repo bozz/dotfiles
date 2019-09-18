@@ -43,7 +43,6 @@ ZSH_THEME="bozz"
 source $HOME/.aliases
 
 alias tree='nocorrect tree'
-alias grunt='nocorrect grunt'
 alias json='nocorrect json'
 
 # Set to this to use case-sensitive completion
@@ -64,7 +63,7 @@ DISABLE_AUTO_TITLE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vagrant docker zsh-autosuggestions)
+plugins=(vagrant z docker zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -82,6 +81,8 @@ fi
 # PATH MODIFICATIONS
 
 _force_prepend_to_path ~/bin
+
+# _append_to_path /Users/bsearles/Library/Python/3.7/bin
 
 # use vim as git/svn editor
 export EDITOR=vim
@@ -136,3 +137,4 @@ if [ -f ~/.zshrc.local ]; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
