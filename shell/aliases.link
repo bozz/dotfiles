@@ -1,5 +1,6 @@
 alias ..='cd ..'
 alias dirsize='du -skhx'
+alias ls="lsd -la"
 alias ll="ls -lha"
 function rmd() {
   rm -rf $1
@@ -55,3 +56,10 @@ alias svnstat='svn diff -r PREV:COMMITTED --summarize'
 
 # npm
 alias npmlg='npm list -g --depth=0'
+
+# journal
+alias jrnl='cd ~/.jrnl;./writer.sh'
+
+# iterm2 scripts
+alias gosyn='osascript ~/bin/iterm_synatec.scpt'
+alias gostash='osascript ~/bin/iterm_stashflow.scpt'
