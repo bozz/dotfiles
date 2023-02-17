@@ -82,7 +82,9 @@ fi
 
 _force_prepend_to_path ~/bin
 
-# _append_to_path /Users/bsearles/Library/Python/3.7/bin
+_append_to_path /usr/local/sbin
+
+_append_to_path /usr/local/opt/openjdk/bin
 
 # use vim as git/svn editor
 export EDITOR=vim
@@ -138,3 +140,8 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
