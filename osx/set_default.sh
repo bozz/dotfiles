@@ -1,12 +1,49 @@
+#!/usr/bin/env bash
+#
 echo "Setting OSX Defaults"
 
+# TODO - do some more research and testing here!!!
 
-# Finder
-# by default show all hidden files in Finder
-defaults write com.apple.finder AppleShowAllFiles -bool true
-defaults write com.apple.finder AppleShowAllExtensions -bool true
-defaults write com.apple.finder ShowStatusBar -bool true
+CURRENT_USER=$(stat -f %Su /dev/console)
+
+# Disable the sound effects on boot
+sudo nvram SystemAudioVolume=" "
+
+###############################################################################
+# Finder                                                                      #
+###############################################################################
+
+# Show icons for hard drives, servers, and removable media on the desktop
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
+# Finder: show all filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Finder: allow text selection in Quick Look
+defaults write com.apple.finder QLEnableTextSelection -bool true
+
+# Display full POSIX path as Finder window title
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+# When performing a search, search the current folder by default
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
+# Disable the warning when changing a file extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# Avoid creating .DS_Store files on network volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+###############################################################################
+# MISC                                                                        #
+###############################################################################
+
+# Disable Siri
+sudo -u "$CURRENT_USER" defaults write com.apple.Siri StatusMenuVisible -bool false
+sudo -u "$CURRENT_USER" defaults write com.apple.assistant.support "Assistant Enabled" -bool false
 
 # Password prompting
 defaults write com.apple.screensaver askForPassword -int 1
@@ -28,7 +65,7 @@ defaults write com.apple.Safari UniversalSearchEnabled -bool false
 defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 
 #Disable Dashboard
-defaults write com.apple.dashboard mcx-disabled -bool true
+# defaults write com.apple.dashboard mcx-disabled -bool true
 
 # Set a really fast key repeat.
 defaults write NSGlobalDomain KeyRepeat -int 0
@@ -46,29 +83,14 @@ defaults write com.apple.dock "wvous-tl-modifier" -int 0
 defaults write com.apple.dock "wvous-tr-corner" -int 4
 defaults write com.apple.dock "wvous-tr-modifier" -int 0
 
-# Terminal
-defaults write com.apple.terminal StringEncodings -array 4
-defaults write com.apple.Terminal "Default Window Settings" -string "Pro"
-defaults write com.apple.Terminal "Startup Window Settings" -string "Pro"
-
-# Show drives and devices
-defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
-
-# Disable back swipe in Chrome
-defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
-defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
-
-
-# Set up Safari for development.
-defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
-defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
-defaults write com.apple.Safari ShowSidebarInTopSites -bool false
-defaults write com.apple.Safari ShowFavoritesBar -bool false
+# # Set up Safari for development.
+# defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+# defaults write com.apple.Safari IncludeDevelopMenu -bool true
+# defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+# defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
+# defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+# defaults write com.apple.Safari ShowSidebarInTopSites -bool false
+# defaults write com.apple.Safari ShowFavoritesBar -bool false
 
 # Restart Finder and Dock so things happen!
 

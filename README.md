@@ -1,15 +1,22 @@
-Dotfiles
-========
+# Dotfiles
 
-My personal dotfiles. 
+My personal dotfiles.
 
-Currently using [kody](https://github.com/jh3y/kody) for installing and managing files. I have kody installed globally with `npm install -g kody`.
+This includes scripts for setting up my complete development environment for both Linux and MaxOS.
 
-# usage
+The goal is to have a full reproducable environment with a single command.
+
+Most dotfiles will be symlinked to the home directory.
+
+## prerequisites
+
+1. nodejs
+2. zx package (global install)
+
+## usage
 
 1. clone repo
-2. run `kody` within dotfiles directory.
-3. select desired options and run...
+2. zx setup.mjs
 
 ## ZSH
 
@@ -18,4 +25,3 @@ To enable zsh-autosuggestions (https://github.com/zsh-users/zsh-autosuggestions)
 ```
 git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 ```
-

@@ -1,6 +1,0 @@
-[submodule "packs/solarized/osx-lion-terminal"]
-	path = packs/solarized/osx-lion-terminal
-	url = https://github.com/tomislav/osx-lion-terminal.app-colors-solarized.git
-[submodule "packs/solarized/gnome-terminal"]
-	path = packs/solarized/gnome-terminal
-	url = https://github.com/sigurdga/gnome-terminal-colors-solarized.git
