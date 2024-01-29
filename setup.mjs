@@ -30,6 +30,10 @@ await $`mkdir -p ${CONFIG_PATH}/kitty`;
 await $`ln -sf "$PWD/packs/kitty/kitty.conf" ${CONFIG_PATH}/kitty/kitty.conf`;
 await $`ln -sf "$PWD/packs/kitty/themes" ${CONFIG_PATH}/kitty/themes`;
 
+// setup nvim
+// TODO: check for existing "nvim" config directory - and back up if exists
+// await $`ln -sf "$PWD/packs/nvim" ${CONFIG_PATH}/nvim`;
+
 // bashtop dracula theme (still need to select within bashtop - press "m")
 await $`ln -sf "$PWD/packs/btop/dracula.theme" ${CONFIG_PATH}/btop/themes/dracula.theme`;
 
