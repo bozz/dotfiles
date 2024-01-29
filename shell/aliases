@@ -19,9 +19,15 @@ alias profile='vim ~/.bashrc.local'
 alias papply='vim ~/.bashrc.local'
 
 # rails
-alias ss='rails server -p 3001'
-alias tlog='tail -f log/development.log'
-alias ropen='open http://localhost:3001'
+#alias ss='rails server -p 3001'
+#alias tlog='tail -f log/development.log'
+#alias ropen='open http://localhost:3001'
+
+# jump to directories
+alias dot='nvim ~/dotfiles'
+alias pi='cd ~/Development/clients/pi/pi/site'
+alias pia='cd ~/Development/clients/pi/pi-admin/site'
+
 
 # git
 alias gs='git status'
@@ -48,11 +54,11 @@ function gshow() {
 #}
 
 # svn
-alias sup='svn update'
-alias scom='svn commit'
-alias slog='svn log'
-alias svnp='svn log -r head:prev -v'
-alias svnstat='svn diff -r PREV:COMMITTED --summarize'
+#alias sup='svn update'
+#alias scom='svn commit'
+#alias slog='svn log'
+#alias svnp='svn log -r head:prev -v'
+#alias svnstat='svn diff -r PREV:COMMITTED --summarize'
 
 # npm
 alias npmlg='npm list -g --depth=0'
@@ -61,5 +67,5 @@ alias npmlg='npm list -g --depth=0'
 alias jrnl='cd ~/.jrnl;./writer.sh'
 
 # iterm2 scripts
-alias gosyn='osascript ~/bin/iterm_synatec.scpt'
-alias gostash='osascript ~/bin/iterm_stashflow.scpt'
+#alias gosyn='osascript ~/bin/iterm_synatec.scpt'
+#alias gostash='osascript ~/bin/iterm_stashflow.scpt'
