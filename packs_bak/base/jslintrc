@@ -1,5 +1,0 @@
-/*jslint devel: false, node: true, sloppy: true, vars: true, maxerr: 50, indent: 2, white: true */
-
-/*global jQuery, $, console */
-
-/* vim: set ft=javascript: */

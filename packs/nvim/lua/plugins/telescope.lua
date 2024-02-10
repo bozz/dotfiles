@@ -1,58 +1,36 @@
--- telescope default mapping: https://github.com/nvim-telescope/telescope.nvim#default-mappings
 return {
-  {
-    "nvim-telescope/telescope.nvim",
-    keys = {
-      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files Telescope" },
-      -- { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "[S]earch [F]iles" },
-      -- { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "[S]earch [H]elp" },
-      -- { "<leader>sw", "<cmd>Telescope grep_string<cr>", desc = "[S]earch current [W]ord" },
-      -- { "<leader>sg", "<cmd>Telescope live_grep<cr>", desc = "[S]earch by [G]rep" },
-      -- { "<leader>sd", "<cmd>Telescope diagnostics<cr>", desc = "[S]earch [D]iagnostics" },
-    },
-    opts = {
+  "nvim-telescope/telescope.nvim",
+  branch = "0.1.x",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    "nvim-tree/nvim-web-devicons",
+  },
+  config = function()
+    local telescope = require("telescope")
+    local actions = require("telescope.actions")
+
+    telescope.setup({
       defaults = {
+        path_display = { "truncate " },
         mappings = {
           i = {
-            ["<C-j>"] = require("telescope.actions").move_selection_next,
-            ["<C-k>"] = require("telescope.actions").move_selection_previous,
-            ["<C-s>"] = require("telescope.actions").send_selected_to_qflist,
-            ["<M-q>"] = false,
+            ["<C-k>"] = actions.move_selection_previous, -- move to prev result
+            ["<C-j>"] = actions.move_selection_next, -- move to next result
+            ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
           },
         },
       },
-      pickers = {
-        find_files = {
-          -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
-          find_command = { "rg", "--files", "--glob", "!**/.git/*", "-L" },
-        },
-      },
-    },
-  },
-  {
-    "telescope.nvim",
-    dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
-      config = function()
-        require("telescope").load_extension("fzf")
-      end,
-    },
-  },
-  {
-    "nvim-telescope/telescope-symbols.nvim",
-  },
+    })
 
-  -- Custom ripgrep configuration:
+    telescope.load_extension("fzf")
 
-  -- I want to search in hidden/dot files.
-  -- "--hidden"
-  --
-  -- I don't want to search in the `.git` directory.
-  -- "--glob")
-  -- "!**/.git/*")
-  --
-  --  I want to follow symbolic links
-  -- "-L"
-  --
+    -- set keymaps
+    local keymap = vim.keymap -- for conciseness
+
+    keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
+    keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
+    keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
+    keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
+  end,
 }

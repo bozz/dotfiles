@@ -1,7 +1,8 @@
 # vim:ft=zsh:ts=2:sw=2:sts:et:
 
-
-# INTERNAL UTILITY FUNCTIONS {{{1
+############################################################################################
+# internal utility functions
+############################################################################################
 
 # Returns whether the given command is executable or aliased.
 _has() {
@@ -26,21 +27,28 @@ _force_prepend_to_path() {
   path=($1 ${(@)path:#$1})
 }
 
+############################################################################################
+# basic settings
+############################################################################################
+
+# use nvim as default editor
+export EDITOR=nvim
+
+export TERM=xterm-256color
+
+# added this because jekyll would fail otherwise bei 'umlaute'
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+# ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="bozz"
+# ZSH_THEME="bozz"
 #ZSH_THEME="agnoster"
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-source $HOME/.aliases
 
 alias tree='nocorrect tree'
 alias json='nocorrect json'
@@ -63,9 +71,9 @@ DISABLE_AUTO_TITLE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(z docker zsh-autosuggestions)
+# plugins=(z docker zsh-autosuggestions)
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # enable color support of ls and also add handy aliases
 # use gdircolors for mac...
@@ -73,34 +81,20 @@ source $ZSH/oh-my-zsh.sh
 #    test -r ~/.dircolors && eval "$(gdircolors -b ~/.dircolors)" || eval "$(gdircolors -b)"
 #    alias ls='gls --color=auto'
 #fi
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-fi
+# if [ -x /usr/bin/dircolors ]; then
+#     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+#     alias ls='ls --color=auto'
+# fi
 
-# PATH MODIFICATIONS
-
-_force_prepend_to_path ~/bin
-
-_append_to_path /usr/local/sbin
-
-_append_to_path /usr/local/opt/openjdk/bin
-
-# use vim as git/svn editor
-export EDITOR=vim
-
-export TERM=xterm-256color
+############################################################################################
+# VI MODE
+############################################################################################
 
 # set vi command mode
 bindkey -v
-
-# added this because jekyll would fail otherwise bei 'umlaute'
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-
-bindkey -v
 bindkey -M viins 'jj' vi-cmd-mode
 
+# show feedback if in NORMAL or INSERT mode
 function zle-line-init zle-keymap-select {
     RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
     RPS2=$RPS1
@@ -109,45 +103,66 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
+############################################################################################
+# INIT PROMPT
+############################################################################################
 
-# fzf via local installation
-# if [ -e ~/.vim/.fzf ]; then
-#   _append_to_path ~/.vim/.fzf/bin
-#   source ~/.vim/.fzf/shell/key-bindings.zsh
-#   source ~/.vim/.fzf/shell/completion.zsh
-# fi
+# PROMPT='%F{202}i%f%F{208}a%f%F{214}npa%f%F{220}n%F{221}@%f%F{220}ub%f%F{214}un%f%F{208}tu:%f%F{202}%1~/%f %F{214}%#%f '
 
-# fzf + ag configuration
-# if _has fzf && _has ag; then
-#   export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
-#   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-#   export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
-#   export FZF_DEFAULT_OPTS='
-#   --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
-#   --color info:108,prompt:109,spinner:108,pointer:168,marker:168
-#   '
-# fi
-#
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-#
-# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# FZF dracula colorscheme
+# export FZF_DEFAULT_OPTS="--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:"
 
-# for managing node versions
+############################################################################################
+# No duplicate history
+############################################################################################
+
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=5000
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt incappendhistory
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# case insensitive completion
+autoload -U compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+############################################################################################
+# PATH MODIFICATIONS
+############################################################################################
+
+_force_prepend_to_path ~/bin
+
+_append_to_path /usr/local/sbin
+_append_to_path /usr/local/opt/openjdk/bin
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+############################################################################################
+# source files
+############################################################################################
 
 # use .zshrc.local for settings specific to one system
 if [ -f ~/.zshrc.local ]; then
   source ~/.zshrc.local
 fi
 
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+source $HOME/.aliases
 
-# FZF dracula colorscheme
-export FZF_DEFAULT_OPTS="--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:"
+############################################################################################
+# setup antidote plugin manager
+############################################################################################
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
+antidote load
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
