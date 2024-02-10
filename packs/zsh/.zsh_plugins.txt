@@ -1,0 +1,19 @@
+# .zsh_plugins.txt
+
+# auto completion
+zsh-users/zsh-autosuggestions
+
+# syntax highlighting
+zsh-users/zsh-syntax-highlighting 
+
+# node version manager
+lukechilds/zsh-nvm
+
+# colorscheme
+dracula/zsh
+
+# prompt
+# sindresorhus/pure     kind:fpath
+
+# spaceship-prompt/spaceship-prompt
+# romkatv/powerlevel10k
