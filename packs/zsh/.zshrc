@@ -133,6 +133,21 @@ autoload -U compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 ############################################################################################
+# COMPLETION SETTINGS
+############################################################################################
+
+autoload -Uz zrecompile
+autoload -Uz compinit
+dump=$ZSH_COMPDUMP
+
+# http://zsh.sourceforge.net/Doc/Release/Conditional-Expressions.html
+if [[ -s $dump(#qN.mh+24) && (! -s "$dump.zwc" || "$dump" -nt "$dump.zwc") ]]; then
+    compinit -i d $ZSH_COMPDUMP
+    zrecompile $ZSH_COMPDUMP
+fi
+compinit -C
+
+############################################################################################
 # PATH MODIFICATIONS
 ############################################################################################
 
@@ -147,18 +162,22 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # source files
 ############################################################################################
 
-# use .zshrc.local for settings specific to one system
-if [ -f ~/.zshrc.local ]; then
-  source ~/.zshrc.local
-fi
+source $HOME/.config/zsh/aliases
 
-source $HOME/.aliases
+# use .zshrc.local for settings specific to one system
+if [ -f $HOME/.zshrc.local ]; then
+  source $HOME/.zshrc.local
+fi
 
 ############################################################################################
 # setup antidote plugin manager
 ############################################################################################
 
-source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+# for zsh-autosuggest plugin
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+# needs to be installed here!
+source $HOME/.config/antidote/antidote.zsh
 
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
 antidote load
@@ -166,3 +185,4 @@ antidote load
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+

@@ -39,8 +39,9 @@ if (!argv._.length) {
 
   await createLink(`./packs/kitty`, `${CONFIG_PATH}/kitty`);
 
-  // // setup kitty, tmux, nvim
+  // // setup kitty, zsh, tmux, nvim
   // await $`ln -sf "$PWD/packs/kitty" ${CONFIG_PATH}/kitty`;
+  // await $`ln -sf "$PWD/packs/zsh" ${CONFIG_PATH}/zsh`;
   // await $`ln -sf "$PWD/packs/tmux" ${CONFIG_PATH}/tmux`;
   // await $`ln -sf "$PWD/packs/nvim" ${CONFIG_PATH}/nvim`;
   //
@@ -101,6 +102,11 @@ throw new Error("NOTE HERE!!");
 // create symbolic link to neovim from vim. when not using neovim on
 // Ubuntu systems, because I use the v alias everywhere.
 // sudo ln -sf /usr/bin/vim /usr/bin/nvim
+
+// install xclip for nvim yanking to clipboard
+// sudo apt install xclip
+
+// sudo snap install btop
 
 // ubuntu neovim setup
 // there is an issue with npm on wsl ubuntu 22. Use this to install npm: https://stackoverflow.com/questions/73673804/npm-show-npm-elf-not-found-error-in-wsl

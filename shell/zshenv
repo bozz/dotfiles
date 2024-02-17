@@ -1,0 +1,5 @@
+# load zsh config from here
+export ZDOTDIR=$HOME/.config/zsh
+
+# location of generated zcompdump (cache for zsh autocompletion)
+export ZSH_COMPDUMP=$HOME/.config/.zcompdump

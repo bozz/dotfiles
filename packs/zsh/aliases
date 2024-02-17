@@ -41,6 +41,24 @@ alias gb='git branch'
 alias glog='git --no-pager log --pretty=format:"%Creset* %C(bold yellow)%h %C(cyan)%ad%Cred%d %Creset%s%C(green) [%cn]" --decorate --date=short --reverse'
 alias gundolast='git reset --soft HEAD~1; git reset HEAD .'
 
+
+(( $+commands[xclip] )) && {
+    alias pbpaste='xclip -i -selection clipboard -o'
+    alias pbcopy='xclip -selection clipboard'
+}
+
+# shortcut for lavat lava-lamp animation
+(( $+commands[lavat] )) && {
+    alias lava='lavat -c yellow -s 1 -R1 -k red'
+}
+
+# the below alias uses pbpaste alias mentioned earlier
+# and defines an anonymous function 
+# yt-dlp is a youtube-dl fork with improviments
+alias ya='(){yt-dlp -x --audio-format mp3 -o "%(title)s.%(ext)s" $(pbpaste);}'
+
+
+
 function gshow() {
 	git show --stat $1
 }
