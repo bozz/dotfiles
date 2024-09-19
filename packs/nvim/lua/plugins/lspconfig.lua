@@ -77,9 +77,22 @@ return {
     })
 
     -- configure typescript server with plugin
-    lspconfig["tsserver"].setup({
+    lspconfig["ts_ls"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
+
+      root_dir = function(fname)
+        local util = require("lspconfig.util")
+        return util.root_pattern(".git")(fname)
+          or util.root_pattern("package.json", "tsconfig.json", "jsconfig.json")(fname)
+      end,
+
+      -- disables messages such as "File is a commonjs module, it may be converted..."
+      init_options = {
+        preferences = {
+          disableSuggestions = true,
+        },
+      },
     })
 
     -- configure css server
