@@ -9,6 +9,9 @@ git/gitconfig.link
 shell/vim.link/plugged
 shell/vim.link/.fzf
 
+packs/zsh/.zcompcache
+packs/zsh/.zsh_sessions
+
 atom.link/.atom
 atom.link/.gitignore
 atom.link/.node-gyp
