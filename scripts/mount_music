@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# mount synology music folder
+sudo mount -t nfs 10.1.0.121:/volume1/music /mnt/music
