@@ -3,7 +3,6 @@
     "lazyvim.plugins.extras.ai.copilot",
     "lazyvim.plugins.extras.ai.copilot-chat",
     "lazyvim.plugins.extras.lang.json",
-    "lazyvim.plugins.extras.lang.markdown",
     "lazyvim.plugins.extras.lang.typescript"
   ],
   "install_version": 7,
@@ -12,3 +11,4 @@
   },
   "version": 8
 }
+
