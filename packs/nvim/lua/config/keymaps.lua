@@ -4,8 +4,9 @@
 
 local keymap = vim.keymap -- for conciseness
 
----------------------
--- General Keymaps -------------------
+---------------------------------------
+-- General Keymaps
+---------------------------------------
 
 -- use jj to exit insert mode
 keymap.set("i", "jj", "<ESC>", { desc = "Exit insert mode with jj" })
@@ -32,6 +33,22 @@ keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" }) --
 keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
 keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
 keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window
+
+------------------------------------------
+-- Plugin Keymaps
+------------------------------------------
+
+-- git
+keymap.set("n", "<leader>gC", "<cmd>FzfLua git_bcommits<cr>", { desc = "Commits (buffer)" })
+
+-- extend which-key
+local wk = require("which-key")
+wk.add({
+  { "<leader>a", group = "ai" },
+})
+
+-- Expand 'cc' into 'CodeCompanion' in the command line
+-- cmd([[cab cc CodeCompanion]])
 
 -- keymap.set("n", "<C-h>", "<C-w>h", { nowait = true })
 -- keymap.set("n", "<C-j>", "<C-w>j", { nowait = true })

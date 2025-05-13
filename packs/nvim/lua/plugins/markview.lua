@@ -1,3 +1,7 @@
+if true then
+  return {}
+end
+
 -- Config inspiration from: https://github.com/l00sed/nvim-lua-config/blob/master/lua/plugins/markview.lua
 
 local headings = {
