@@ -47,6 +47,9 @@ wk.add({
   { "<leader>a", group = "ai" },
 })
 
+-- claude-code
+keymap.set("n", "<leader>ac", "<cmd>ClaudeCode<CR>", { desc = "Toggle Claude Code" })
+
 -- Expand 'cc' into 'CodeCompanion' in the command line
 -- cmd([[cab cc CodeCompanion]])
 

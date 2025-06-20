@@ -5,14 +5,14 @@ return {
     "nvim-treesitter/nvim-treesitter",
   },
   keys = {
-    { "<leader>ai", ":CodeCompanion<cr>", mode = "n", desc = "Inline Assistant" },
-    { "<leader>ai", ":'<,'>CodeCompanion<cr>", mode = "v", desc = "Inline Assistant (selected)" },
-    { "<leader>af", ":'<,'>CodeCompanion /fix<cr>", mode = "v", desc = "Fix selected code" },
-    { "<leader>ae", ":'<,'>CodeCompanion /explain<cr>", mode = "v", desc = "Explain selected code" },
+    -- { "<leader>ai", ":CodeCompanion<cr>", mode = "n", desc = "Inline Assistant" },
+    -- { "<leader>ai", ":'<,'>CodeCompanion<cr>", mode = "v", desc = "Inline Assistant (selected)" },
+    -- { "<leader>af", ":'<,'>CodeCompanion /fix<cr>", mode = "v", desc = "Fix selected code" },
+    -- { "<leader>ae", ":'<,'>CodeCompanion /explain<cr>", mode = "v", desc = "Explain selected code" },
 
     -- Other useful keymaps
     { "<leader>aa", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "CodeCompanion Actions" },
-    { "<leader>ac", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" }, desc = "CodeCompanion Chat" },
+    { "<leader>ag", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" }, desc = "CodeCompanion Chat" },
     { "<leader>aA", "<cmd>CodeCompanionChat Add<cr>", mode = "v", desc = "Add to Chat" },
   },
   opts = {

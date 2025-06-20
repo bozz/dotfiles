@@ -9,6 +9,8 @@ vim.g.mapleader = ","
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- vim.api.nvim_set_hl(0, "Visual", { bg = "#285577", fg = "#ffffff" })
+
 local set = vim.opt
 
 -- line numbers
