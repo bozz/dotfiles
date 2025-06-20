@@ -157,6 +157,14 @@ _append_to_path /usr/local/sbin
 _append_to_path /usr/local/opt/openjdk/bin
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$HOME/.claude/local:$PATH"
+
+############################################################################################
+# bun setup
+############################################################################################
+
+export BUN_INSTALL="$HOME/.bun" 
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 ############################################################################################
 # source files
@@ -186,3 +194,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+
+# bun completions
+[ -s "/home/bsearles/.bun/_bun" ] && source "/home/bsearles/.bun/_bun"

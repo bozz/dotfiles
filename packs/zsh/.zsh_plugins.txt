@@ -6,9 +6,6 @@ zsh-users/zsh-autosuggestions
 # syntax highlighting
 zsh-users/zsh-syntax-highlighting 
 
-# node version manager
-lukechilds/zsh-nvm
-
 # colorscheme
 dracula/zsh
 
