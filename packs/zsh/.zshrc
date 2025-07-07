@@ -184,6 +184,8 @@ fi
 # for zsh-autosuggest plugin
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
+export ANTIDOTE_HOME=~/.cache/antidote
+
 # needs to be installed here!
 source $HOME/.config/antidote/antidote.zsh
 
